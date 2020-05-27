@@ -21,6 +21,7 @@
 #include <Nazara/Platform/Enums.hpp>
 #include <Nazara/Platform/EventHandler.hpp>
 #include <Nazara/Platform/Icon.hpp>
+#include <Nazara/Platform/Menu.hpp>
 #include <Nazara/Platform/VideoMode.hpp>
 #include <Nazara/Platform/WindowHandle.hpp>
 #include <queue>
@@ -58,6 +59,8 @@ namespace Nz
 			void EnableKeyRepeat(bool enable);
 			void EnableSmoothScrolling(bool enable);
 
+			void ForceDrawMenu();
+
 			inline const CursorRef& GetCursor() const;
 			inline CursorController& GetCursorController();
 			inline EventHandler& GetEventHandler();
@@ -89,6 +92,7 @@ namespace Nz
 			void SetIcon(IconRef icon);
 			void SetMaximumSize(const Vector2i& maxSize);
 			void SetMaximumSize(int width, int height);
+			void SetMenu(Menu& menu);
 			void SetMinimumSize(const Vector2i& minSize);
 			void SetMinimumSize(int width, int height);
 			void SetPosition(const Vector2i& position);

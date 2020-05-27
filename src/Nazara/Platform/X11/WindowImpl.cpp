@@ -276,6 +276,10 @@ namespace Nz
 		m_smoothScrolling = enable;
 	}
 
+	void WindowImpl::ForceDrawMenu()
+	{
+	}
+
 	WindowHandle WindowImpl::GetHandle() const
 	{
 		return m_window;
@@ -551,6 +555,10 @@ namespace Nz
 			NazaraError("Failed to set maximum size");
 
 		xcb_flush(connection);
+	}
+
+	void WindowImpl::SetMenu(Menu& menu)
+	{
 	}
 
 	void WindowImpl::SetMinimumSize(int width, int height)

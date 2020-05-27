@@ -70,6 +70,14 @@ namespace Nz
 		WindowStyle_Max = WindowStyle_Threaded
 	};
 
+	enum MenuItemType
+	{
+		MenuItemType_Button,
+		MenuItemType_SubMenu,
+
+		MenuItemType_Max = MenuItemType_SubMenu
+	};
+
 	template<>
 	struct EnumAsFlags<WindowStyle>
 	{

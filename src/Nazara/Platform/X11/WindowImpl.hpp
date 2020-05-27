@@ -14,6 +14,7 @@
 #include <Nazara/Math/Vector2.hpp>
 #include <Nazara/Platform/Enums.hpp>
 #include <Nazara/Platform/Keyboard.hpp>
+#include <Nazara/Platform/Menu.hpp>
 #include <Nazara/Platform/WindowHandle.hpp>
 #include <xcb/randr.h>
 #include <xcb/xcb_icccm.h>
@@ -43,6 +44,8 @@ namespace Nz
 			void EnableKeyRepeat(bool enable);
 			void EnableSmoothScrolling(bool enable);
 
+			void ForceDrawMenu();
+
 			WindowHandle GetHandle() const;
 			unsigned int GetHeight() const;
 			Vector2i GetPosition() const;
@@ -67,6 +70,7 @@ namespace Nz
 			void SetFocus();
 			void SetIcon(const Icon& icon);
 			void SetMaximumSize(int width, int height);
+			void SetMenu(Menu& menu);
 			void SetMinimumSize(int width, int height);
 			void SetPosition(int x, int y);
 			void SetSize(unsigned int width, unsigned int height);

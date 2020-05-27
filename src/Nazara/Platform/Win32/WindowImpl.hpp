@@ -45,6 +45,8 @@ namespace Nz
 			void EnableKeyRepeat(bool enable);
 			void EnableSmoothScrolling(bool enable);
 
+			void ForceDrawMenu();
+
 			WindowHandle GetHandle() const;
 			Vector2i GetPosition() const;
 			Vector2ui GetSize() const;
@@ -67,6 +69,7 @@ namespace Nz
 			void SetFocus();
 			void SetIcon(const Icon& icon);
 			void SetMaximumSize(int width, int height);
+			void SetMenu(Menu& menu);
 			void SetMinimumSize(int width, int height);
 			void SetPosition(int x, int y);
 			void SetSize(unsigned int width, unsigned int height);

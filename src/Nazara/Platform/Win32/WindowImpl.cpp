@@ -15,6 +15,7 @@
 #include <Nazara/Platform/Icon.hpp>
 #include <Nazara/Platform/Win32/CursorImpl.hpp>
 #include <Nazara/Platform/Win32/IconImpl.hpp>
+#include <Nazara/Platform/Win32/MenuImpl.hpp>
 #include <Nazara/Utility/Image.hpp>
 #include <cstdio>
 #include <memory>
@@ -221,6 +222,11 @@ namespace Nz
 		m_smoothScrolling = enable;
 	}
 
+	void WindowImpl::ForceDrawMenu()
+	{
+		::DrawMenuBar(m_handle);
+	}
+
 	WindowHandle WindowImpl::GetHandle() const
 	{
 		return m_handle;
@@ -353,6 +359,11 @@ namespace Nz
 			m_maxSize.y = rect.bottom-rect.top;
 		else
 			m_maxSize.y = -1;
+	}
+
+	void WindowImpl::SetMenu(Menu& menu)
+	{
+		::SetMenu(static_cast<HWND>(GetHandle()), static_cast<HMENU>(menu.GetHandle()));
 	}
 
 	void WindowImpl::SetMinimumSize(int width, int height)
@@ -642,6 +653,24 @@ namespace Nz
 					event.mouseButton.x = GET_X_LPARAM(lParam);
 					event.mouseButton.y = GET_Y_LPARAM(lParam);
 					m_parent->PushEvent(event);
+
+					break;
+				}
+
+				case WM_MENUCOMMAND:
+				{
+					HMENU handle = reinterpret_cast<HMENU>(lParam);
+
+					MENUINFO menuInfo = {};
+					menuInfo.cbSize = sizeof(menuInfo);
+					menuInfo.fMask = MIM_MENUDATA;
+
+					GetMenuInfo(handle, &menuInfo);
+
+					AbstractButtonedMenuImpl* menu = reinterpret_cast<AbstractButtonedMenuImpl*>(menuInfo.dwMenuData);
+
+					if (menu)
+						menu->PressButtonAt(wParam);
 
 					break;
 				}

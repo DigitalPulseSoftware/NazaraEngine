@@ -205,6 +205,19 @@ namespace Nz
 		m_impl->EnableSmoothScrolling(enable);
 	}
 
+	void Window::ForceDrawMenu()
+	{
+		#if NAZARA_PLATFORM_SAFE
+		if (!m_impl)
+		{
+			NazaraError("Window not created");
+			return;
+		}
+		#endif
+
+		m_impl->ForceDrawMenu();
+	}
+
 	WindowHandle Window::GetHandle() const
 	{
 		#if NAZARA_PLATFORM_SAFE
@@ -427,6 +440,21 @@ namespace Nz
 		#endif
 
 		m_impl->SetMaximumSize(width, height);
+	}
+
+	// /!\ You should call SetAssigned(false) to any previously assigned menu to this window
+	void Window::SetMenu(Menu& menu)
+	{
+		#if NAZARA_PLATFORM_SAFE
+		if (!m_impl)
+		{
+			NazaraError("Window not created");
+			return;
+		}
+		#endif
+
+		m_impl->SetMenu(menu);
+		menu.SetAssigned(true);
 	}
 
 	void Window::SetMinimumSize(const Vector2i& minSize)
